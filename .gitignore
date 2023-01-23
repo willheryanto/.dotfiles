@@ -1,0 +1,4 @@
+.stow-local-ignore
+
+.config/karabiner/automatic_backups/
+.config/tmux/plugins

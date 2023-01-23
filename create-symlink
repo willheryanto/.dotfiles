@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+cat <<EOF > ~/.dotfiles/.config/.stow-local-ignore
+zsh
+EOF
+
+rm -rf ~/.config && mkdir ~/.config && stow -d ~/.dotfiles/.config/ . -t ~/.config
+
+
+cat <<EOF > ~/.dotfiles/.config/zsh/.stow-local-ignore
+\.zshenv
+EOF
+
+mkdir ~/.config/zsh/ && stow -d ~/.dotfiles/.config/zsh/ . -t ~/.config/zsh
+
+if [[ -f ~/.zshenv ]]; then
+  rm ~/.zshenv
+fi
+
+cd ~ && ln -sf ~/.dotfiles/.config/zsh/.zshenv
+
+exec zsh
