@@ -83,6 +83,21 @@ function M.file_browser()
   require("telescope").extensions.file_browser.file_browser(opts)
 end
 
+function M.file_browser_from_current_buffer()
+  local opts
+
+  opts = {
+    sorting_strategy = "ascending",
+    scroll_strategy = "cycle",
+    layout_config = {
+      prompt_position = "top",
+    },
+    path = "%:p:h",
+  }
+
+  require("telescope").extensions.file_browser.file_browser(opts)
+end
+
 function M.search_only_certain_files()
   require("telescope.builtin").find_files {
     find_command = {

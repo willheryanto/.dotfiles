@@ -11,6 +11,7 @@ map_tele("<space><space>d", "diagnostics")
 -- File
 map_tele("<space>fd", "find_files")
 map_tele("<space>fe", "file_browser")
+map_tele("<space>-", "file_browser_from_current_buffer")
 map_tele("<space>fz", "search_only_certain_files")
 
 -- Text
