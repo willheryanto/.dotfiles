@@ -13,13 +13,6 @@ return {
       require "wh.lsp"
     end,
   },
-  -- {
-  --   'glepnir/lspsaga.nvim',
-  --   event = 'BufRead',
-  --   config = function()
-  --     require('lspsaga').setup({})
-  --   end
-  -- },
   {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {
