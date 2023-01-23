@@ -12,6 +12,10 @@ treesitter.setup {
     "go",
     "vim",
     "bash",
+    "yaml",
+    "hcl",
+    "python",
+    "sql",
   },
 
   highlight = { enable = true },

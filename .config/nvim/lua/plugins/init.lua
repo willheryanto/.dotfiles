@@ -7,4 +7,5 @@ return {
   "tpope/vim-repeat", -- Supercharged "."
   "tpope/vim-unimpaired", -- Nice to have keybindings
   "windwp/nvim-autopairs", -- Auto close brackets
+  "folke/trouble.nvim", -- Diagnostic manager
 }

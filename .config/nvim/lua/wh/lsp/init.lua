@@ -26,7 +26,7 @@ local on_attach = function(_, bufnr)
 
     -- See `:help K` for why this keymap
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+    -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -52,12 +52,6 @@ end
 
 -- Enable the following language servers
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  tsserver = {},
-  bashls = {},
   sumneko_lua = {
     Lua = {
       diagnostics = {
@@ -72,10 +66,17 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  tsserver = {},
+  bashls = {},
+  gopls = {},
   texlab = {},
+  -- clangd = {},
+  -- pyright = {},
+  -- rust_analyzer = {},
 }
 local formatters = {
   stylua = {},
+  shfmt = {},
 }
 
 local linters = {}
