@@ -11,4 +11,10 @@ return {
   },
 
   "nvim-telescope/telescope-file-browser.nvim",
+  {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require("neoclip").setup()
+    end,
+  },
 }

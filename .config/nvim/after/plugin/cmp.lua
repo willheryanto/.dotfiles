@@ -1,7 +1,18 @@
-local status, cmp = pcall(require, "cmp")
-if not status then
+local has_cmp, cmp = pcall(require, "cmp")
+if not has_cmp then
   return
 end
+
+local has_lspkind, lspkind = pcall(require, "lspkind")
+if not has_lspkind then
+  return
+end
+
+lspkind.init {
+  symbol_map = {
+    Copilot = "",
+  },
+}
 
 local luasnip = require "luasnip"
 
@@ -41,5 +52,30 @@ cmp.setup {
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = "copilot" },
+  },
+  {
+    { name = "path" },
+    { name = "buffer", keyword_length = 5 },
+  },
+  formatting = {
+    format = lspkind.cmp_format {
+      with_text = true,
+      menu = {
+        buffer = "[buf]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[api]",
+        path = "[path]",
+        luasnip = "[snip]",
+      },
+    },
+  },
+  view = {
+    entries = {
+      native = true,
+    },
+  },
+  experimental = {
+    ghost_text = true,
   },
 }

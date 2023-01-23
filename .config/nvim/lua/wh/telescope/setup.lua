@@ -33,3 +33,5 @@ telescope.setup {
 }
 
 _ = require("telescope").load_extension "file_browser"
+_ = require("telescope").load_extension "neoclip"
+_ = require("telescope").load_extension "notify"

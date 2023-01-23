@@ -69,8 +69,6 @@ zi load asdf-vm/asdf
 # Settings               #
 ##########################
 
-set -o vi
-
 bindkey '^P' up-history
 bindkey '^N' down-history
 
