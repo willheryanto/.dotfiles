@@ -25,5 +25,3 @@ opt.breakindent = true
 opt.clipboard = "unnamedplus"
 
 opt.mouse = "a"
-
-vim.opt.undofile = true

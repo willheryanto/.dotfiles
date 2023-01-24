@@ -98,6 +98,21 @@ function M.file_browser_from_current_buffer()
   require("telescope").extensions.file_browser.file_browser(opts)
 end
 
+function M.file_browser_project()
+  local opts
+
+  opts = {
+    sorting_strategy = "ascending",
+    scroll_strategy = "cycle",
+    layout_config = {
+      prompt_position = "top",
+    },
+    path = os.getenv "PROJECT_PATH",
+  }
+
+  require("telescope").extensions.file_browser.file_browser(opts)
+end
+
 function M.search_only_certain_files()
   require("telescope.builtin").find_files {
     find_command = {
@@ -109,12 +124,14 @@ function M.search_only_certain_files()
   }
 end
 
-return setmetatable({}, {
-  __index = function(_, k)
-    if M[k] then
-      return M[k]
-    else
-      return require("telescope.builtin")[k]
-    end
-  end,
-})
+-- return setmetatable({}, {
+--   __index = function(_, k)
+--     if M[k] then
+--       return M[k]
+--     else
+--       return require("telescope.builtin")[k]
+--     end
+--   end,
+-- })
+
+return M

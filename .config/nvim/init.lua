@@ -1,5 +1,3 @@
-require "wh.globals"
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
