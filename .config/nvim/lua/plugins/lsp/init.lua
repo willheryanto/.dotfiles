@@ -15,6 +15,7 @@ return {
       require("inc_rename").setup()
 
       require("wh.util").on_attach(function(client, buffer)
+        require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -37,6 +38,7 @@ return {
         bashls = {},
         gopls = {},
         texlab = {},
+        pyright = {},
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -66,6 +68,8 @@ return {
       local formatters = {
         stylua = {},
         shfmt = {},
+        black = {},
+        prettier = {},
       }
 
       require("mason-tool-installer").setup {
