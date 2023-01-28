@@ -7,6 +7,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "AckslD/nvim-neoclip.lua",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
       require("neoclip").setup()
@@ -44,7 +45,7 @@ return {
       _ = require("telescope").load_extension "file_browser"
       _ = require("telescope").load_extension "neoclip"
       _ = require("telescope").load_extension "notify"
-
+      _ = require("telescope").load_extension "fzf"
     end,
   },
 }

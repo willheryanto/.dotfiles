@@ -16,6 +16,8 @@ treesitter.setup {
     "hcl",
     "python",
     "sql",
+    "css",
+    "markdown",
   },
 
   highlight = { enable = true },

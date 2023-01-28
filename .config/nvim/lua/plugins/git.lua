@@ -12,8 +12,17 @@ return {
       "nvim-telescope/telescope.nvim",
       "kyazdani42/nvim-web-devicons",
     },
+    keys = {
+      { "<leader>go", ":Octo " },
+    },
     config = function()
       require("octo").setup()
     end,
+  },
+  {
+    "tyru/open-browser-github.vim",
+    dependencies = {
+      "tyru/open-browser.vim",
+    },
   },
 }
