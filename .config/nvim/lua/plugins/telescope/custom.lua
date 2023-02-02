@@ -10,6 +10,8 @@ local set_prompt_to_entry_value = function(prompt_bufnr)
   action_state.get_current_picker(prompt_bufnr):reset_prompt(entry.ordinal)
 end
 
+local fb_actions = require("telescope").extensions.file_browser.actions
+
 local M = {}
 
 function M.edit_neovim()
@@ -108,6 +110,22 @@ function M.file_browser_project()
       prompt_position = "top",
     },
     path = os.getenv "PROJECT_PATH",
+
+    mappings = {
+      i = {
+        ["<CR>"] = false,
+      },
+      n = {
+        ["<CR>"] = false,
+      },
+    },
+
+    attach_mappings = function(_, map)
+      map("i", "<CR>", fb_actions.change_cwd)
+      map("n", "<CR>", fb_actions.change_cwd)
+
+      return true
+    end,
   }
 
   require("telescope").extensions.file_browser.file_browser(opts)

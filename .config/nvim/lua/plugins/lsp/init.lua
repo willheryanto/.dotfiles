@@ -6,7 +6,8 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "j-hui/fidget.nvim",
-      "folke/neodev.nvim",
+      "folke/neodev.nvim", -- lua
+      "simrat39/rust-tools.nvim", -- rust
       "hrsh7th/cmp-nvim-lsp",
       "smjonas/inc-rename.nvim",
     },
@@ -39,11 +40,22 @@ return {
         gopls = {},
         texlab = {},
         pyright = {},
+        astro = {},
+        cssls = {},
+        cssmodules_ls = {},
+        tailwindcss = {},
+        rust_analyzer = {
+          disabled = true,
+        },
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       local setup = function(server)
+        if server["disabled"] then
+          return
+        end
+
         require("lspconfig")[server].setup {
           capabilities = capabilities,
           settings = servers[server],
@@ -54,6 +66,8 @@ return {
 
       require("mason-lspconfig").setup { ensure_installed = vim.tbl_keys(servers) }
       require("mason-lspconfig").setup_handlers { setup }
+
+      require("plugins.lsp.rust").setup()
     end,
   },
 
