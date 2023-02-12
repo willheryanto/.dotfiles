@@ -22,6 +22,7 @@ return {
 
       local servers = {
         sumneko_lua = {
+          custom_name = "lua_ls",
           Lua = {
             diagnostics = {
               globals = {
@@ -47,6 +48,9 @@ return {
         rust_analyzer = {
           disabled = true,
         },
+        vimls = {},
+        marksman = {},
+        sqlls = {},
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -56,7 +60,16 @@ return {
           return
         end
 
-        require("lspconfig")[server].setup {
+        local current_settings = servers[server]
+
+        local server_name = nil
+        if current_settings["custom_name"] then
+          server_name = current_settings["custom_name"]
+        else
+          server_name = server
+        end
+
+        require("lspconfig")[server_name].setup {
           capabilities = capabilities,
           settings = servers[server],
         }
@@ -109,7 +122,9 @@ return {
         return require("null-ls").builtins[null_type][tool].with(config)
       end
 
-      local null_sources = {}
+      local null_sources = {
+        require("null-ls").builtins.formatting.sql_formatter,
+      }
 
       for formatter, config in pairs(formatters) do
         local source = build_null_source(formatter, config, FORMATTING)
