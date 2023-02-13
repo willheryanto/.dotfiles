@@ -21,8 +21,7 @@ return {
       end)
 
       local servers = {
-        sumneko_lua = {
-          custom_name = "lua_ls",
+        lua_ls = {
           Lua = {
             diagnostics = {
               globals = {
@@ -60,16 +59,7 @@ return {
           return
         end
 
-        local current_settings = servers[server]
-
-        local server_name = nil
-        if current_settings["custom_name"] then
-          server_name = current_settings["custom_name"]
-        else
-          server_name = server
-        end
-
-        require("lspconfig")[server_name].setup {
+        require("lspconfig")[server].setup {
           capabilities = capabilities,
           settings = servers[server],
         }
