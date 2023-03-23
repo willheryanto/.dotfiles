@@ -17,6 +17,7 @@ lspkind.init {
 local luasnip = require "luasnip"
 
 require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load { paths = { os.getenv "HOME" .. "/.config/snippets" } }
 
 cmp.setup {
   snippet = {
@@ -32,6 +33,13 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    ["<C-e>"] = cmp.mapping(function(fallback)
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()

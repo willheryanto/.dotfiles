@@ -1,6 +1,6 @@
 local M = {}
 
-M.autoformat = true
+M.autoformat = false
 
 function M.format()
   local buf = vim.api.nvim_get_current_buf()

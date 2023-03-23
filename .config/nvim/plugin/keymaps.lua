@@ -5,7 +5,7 @@ keymap("n", "ss", ":split<Return><C-w>w")
 keymap("n", "sv", ":vsplit<Return><C-w>w")
 
 -- New tab
-keymap("n", "te", ":tabedit")
+keymap("n", "te", ":tabedit ")
 -- keymap('n', 'tt', ':tabnew<CR>')
 
 -- Switching tabs

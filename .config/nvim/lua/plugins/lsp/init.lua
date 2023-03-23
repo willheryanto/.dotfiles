@@ -36,7 +36,9 @@ return {
           },
         },
         tsserver = {},
-        bashls = {},
+        bashls = {
+          SHELLCHECK_ARGUMENTS = "-x",
+        },
         gopls = {},
         texlab = {},
         pyright = {},
@@ -59,10 +61,17 @@ return {
           return
         end
 
-        require("lspconfig")[server].setup {
+        local server_config = {
           capabilities = capabilities,
-          settings = servers[server],
         }
+
+        if server == "bashls" then
+          server_config["cmd_env"] = servers[server]
+        else
+          server_config["settings"] = servers[server]
+        end
+
+        require("lspconfig")[server].setup(server_config)
       end
 
       require("mason").setup()
@@ -85,6 +94,7 @@ return {
       local formatters = {
         stylua = {},
         shfmt = {},
+        isort = {},
         black = {},
         prettier = {},
       }

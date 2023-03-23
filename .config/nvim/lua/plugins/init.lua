@@ -8,4 +8,12 @@ return {
   "tpope/vim-unimpaired", -- Nice to have keybindings
   "windwp/nvim-autopairs", -- Auto close brackets
   "folke/trouble.nvim", -- Diagnostic manager
+  {
+    "michaelb/sniprun",
+    build = "bash ./install.sh",
+  }, -- Run code snippets"
+  {
+    "knubie/vim-kitty-navigator",
+    build = { "cp ./*.py ~/.config/kitty/" },
+  },
 }

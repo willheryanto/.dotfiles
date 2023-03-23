@@ -14,14 +14,14 @@ treesitter.setup {
     "bash",
     "yaml",
     "hcl",
-    "python",
+    -- "python",
     "sql",
     "css",
-    "markdown",
+    -- "markdown",
   },
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { "python" } },
+  indent = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
