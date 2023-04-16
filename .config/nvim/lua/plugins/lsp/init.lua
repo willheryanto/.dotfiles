@@ -52,6 +52,7 @@ return {
         vimls = {},
         marksman = {},
         sqlls = {},
+        terraformls = {},
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -96,7 +97,12 @@ return {
         shfmt = {},
         isort = {},
         black = {},
-        prettier = {},
+        prettier = {
+          condition = function(utils)
+            return utils.has_file { ".prettierrc.js" }
+          end,
+        },
+        eslint_d = {},
       }
 
       require("mason-tool-installer").setup {
@@ -124,6 +130,7 @@ return {
 
       local null_sources = {
         require("null-ls").builtins.formatting.sql_formatter,
+        require("null-ls").builtins.diagnostics.eslint_d,
       }
 
       for formatter, config in pairs(formatters) do
