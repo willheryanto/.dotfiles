@@ -5,7 +5,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "j-hui/fidget.nvim",
       "folke/neodev.nvim", -- lua
       "simrat39/rust-tools.nvim", -- rust
       "hrsh7th/cmp-nvim-lsp",
@@ -21,20 +20,6 @@ return {
       end)
 
       local servers = {
-        lua_ls = {
-          Lua = {
-            diagnostics = {
-              globals = {
-                "vim",
-              },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-          },
-        },
         tsserver = {},
         bashls = {
           SHELLCHECK_ARGUMENTS = "-x",
@@ -42,6 +27,22 @@ return {
         gopls = {},
         texlab = {},
         pyright = {},
+        -- pylsp = {
+        --   pylsp = {
+        --     plugins = {
+        --       ruff = { enabled = false },
+        --       autopep8 = { enabled = false },
+        --       flake8 = { enabled = false },
+        --       mccabe = { enabled = false },
+        --       pycodestyle = { enabled = false },
+        --       pydocstyle = { enabled = false },
+        --       pyflakes = { enabled = false },
+        --       pylint = { enabled = false },
+        --       yapf = { enabled = false },
+        --     },
+        --   },
+        -- },
+        ruff_lsp = {},
         astro = {},
         cssls = {},
         cssmodules_ls = {},
@@ -53,6 +54,7 @@ return {
         marksman = {},
         sqlls = {},
         terraformls = {},
+        eslint = {},
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -90,23 +92,68 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "jay-babu/mason-null-ls.nvim",
     },
     config = function()
       local formatters = {
         stylua = {},
         shfmt = {},
-        isort = {},
-        black = {},
+        -- isort = {},
+        -- black = {},
+        ruff = {},
         prettier = {
           condition = function(utils)
             return utils.has_file { ".prettierrc.js" }
           end,
         },
-        eslint_d = {},
+        eslint_d = {
+          condition = function(utils)
+            return utils.has_file { ".eslintrc.js" }
+          end,
+        },
+        sql_formatter = {
+          alias = "sql-formatter",
+        },
       }
 
-      require("mason-tool-installer").setup {
-        ensure_installed = vim.tbl_keys(formatters),
+      local linters = {
+        -- eslint_d = {
+        --   condition = function(utils)
+        --     return utils.has_file { ".eslintrc.js" }
+        --   end,
+        -- },
+        -- mypy = {}
+      }
+
+      local build_tools = function(tool_formatters, tool_linters)
+        local tools = {}
+
+        for k, v in pairs(tool_formatters) do
+          if tools[k] == nil then
+            if v["alias"] then
+              tools[v["alias"]] = v
+            else
+              tools[k] = v
+            end
+          end
+        end
+
+        for k, v in pairs(tool_linters) do
+          if tools[k] == nil then
+            if v["alias"] then
+              tools[v["alias"]] = v
+            else
+              tools[k] = v
+            end
+          end
+        end
+
+        return tools
+      end
+
+      require("mason-null-ls").setup {
+        -- ensure_installed = vim.tbl_keys(formatters),
+        ensure_installed = vim.tbl_keys(build_tools(formatters, linters)),
       }
 
       local FORMATTING = "formatting"
@@ -129,12 +176,17 @@ return {
       end
 
       local null_sources = {
-        require("null-ls").builtins.formatting.sql_formatter,
-        require("null-ls").builtins.diagnostics.eslint_d,
+        -- require("null-ls").builtins.formatting.sql_formatter,
+        -- require("null-ls").builtins.diagnostics.eslint_d,
       }
 
       for formatter, config in pairs(formatters) do
         local source = build_null_source(formatter, config, FORMATTING)
+        table.insert(null_sources, source)
+      end
+
+      for linter, config in pairs(linters) do
+        local source = build_null_source(linter, config, DIAGNOSTICS)
         table.insert(null_sources, source)
       end
 

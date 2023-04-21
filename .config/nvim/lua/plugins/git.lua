@@ -1,6 +1,12 @@
 return {
-  "lewis6991/gitsigns.nvim",
-  "rhysd/git-messenger.vim",
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = vim.fn.executable "git" == 1,
+    opts = {},
+  },
+  {
+    "rhysd/git-messenger.vim",
+  },
   {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
@@ -15,9 +21,7 @@ return {
     keys = {
       { "<leader>go", ":Octo " },
     },
-    config = function()
-      require("octo").setup()
-    end,
+    opts = {},
   },
   {
     "tyru/open-browser-github.vim",
