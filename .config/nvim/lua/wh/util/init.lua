@@ -23,5 +23,9 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
+function M.extend_tbl(default, opts)
+  opts = opts or {}
+  return default and vim.tbl_deep_extend("force", default, opts) or opts
+end
 
 return M

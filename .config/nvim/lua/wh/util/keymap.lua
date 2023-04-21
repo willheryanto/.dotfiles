@@ -3,7 +3,7 @@ local M = {}
 M._keys = nil
 
 function M.get()
-  local format = require("plugins.lsp.format").format
+  local format = require("wh.util.format").format
   M._keys = M._keys
     or {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
@@ -25,7 +25,6 @@ function M.get()
       { "<leader>cc", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
       { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
       { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
-      -- { "<leader>cr", M.rename, expr = pcall(require, "inc_rename"), desc = "Rename", has = "rename" },
       { "<leader>cr", M.rename, desc = "Rename", has = "rename" },
     }
   return M._keys
@@ -56,11 +55,6 @@ function M.on_attach(client, buffer)
 end
 
 function M.rename()
-  -- if pcall(require, "inc_rename") then
-  --   return ":IncRename " .. vim.fn.expand "<cword>"
-  -- else
-  --   vim.lsp.buf.rename()
-  -- end
   vim.lsp.buf.rename()
 end
 

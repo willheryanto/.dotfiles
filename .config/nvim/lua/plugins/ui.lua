@@ -48,15 +48,6 @@ return {
     },
   }, -- Fancier statusline
   {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      char = "┊",
-      show_trailing_blankline_indent = false,
-      use_treesitter = true,
-      show_current_context = true,
-    },
-  }, -- Add indentation guides even on blank lines
-  {
     "akinsho/bufferline.nvim",
     opts = {
       options = {
@@ -69,7 +60,34 @@ return {
       },
     },
   }, -- Tabs
-  "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
+  {
+    "yamatsum/nvim-web-nonicons",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+  },
+  {
+    "rcarriga/nvim-notify",
+    lazy = false,
+    config = function()
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.notify = function(msg, level, opts)
+        -- log.info(msg, level, opts)
+        if string.find(msg, "method .* is not supported") then
+          return
+        end
+
+        require "notify"(msg, level, opts)
+      end
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+      char = "┊",
+      show_trailing_blankline_indent = false,
+      use_treesitter = true,
+      show_current_context = true,
+    },
+  }, -- Add indentation guides even on blank lines
   {
     "folke/todo-comments.nvim",
     dependencies = {
@@ -91,6 +109,6 @@ return {
   {
     "j-hui/fidget.nvim",
     opts = {},
-    -- config = require "plugins.configs.fidget",
   },
+  "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
 }
