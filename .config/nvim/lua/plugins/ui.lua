@@ -51,20 +51,21 @@ return {
       tabline = {},
     },
   }, -- Fancier statusline
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   lazy = false,
-  --   opts = {
-  --     options = {
-  --       mode = "tabs",
-  --       separator_style = "slant",
-  --       always_show_bufferline = false,
-  --       show_buffer_close_icons = false,
-  --       show_close_icon = false,
-  --       color_icons = true,
-  --     },
-  --   },
-  -- }, -- Tabs
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    priority = 0, -- load before other plugins, to negate rendering issues
+    opts = {
+      options = {
+        mode = "tabs",
+        separator_style = "slant",
+        always_show_bufferline = false,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        color_icons = true,
+      },
+    },
+  }, -- Tabs
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
