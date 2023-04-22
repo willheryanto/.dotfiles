@@ -3,7 +3,7 @@ local M = {}
 M._keys = nil
 
 function M.get()
-  local format = require("wh.util.format").format
+  local format = require("wh.utils.format").format
   M._keys = M._keys
     or {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },

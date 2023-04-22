@@ -1,6 +1,6 @@
 return function(_, opts)
   local nls = require "null-ls"
-  local tools = require "wh.util.tools"
+  local tools = require "wh.utils.tools"
 
   local sources = {}
 
@@ -14,7 +14,7 @@ return function(_, opts)
 
   tools.iterate_tools(callback)
 
-  nls.setup(require("wh.util").extend_tbl(opts, {
+  nls.setup(require("wh.utils").extend_tbl(opts, {
     sources = sources,
   }))
 end

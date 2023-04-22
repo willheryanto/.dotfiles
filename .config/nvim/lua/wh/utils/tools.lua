@@ -119,7 +119,7 @@ M.dap.configurations = {
   },
 
   typescript = {
-    require("wh.util").extend_tbl(dap_default_js, {
+    require("wh.utils").extend_tbl(dap_default_js, {
       runtimeExecutable = "ts-node",
       resolveSourceMapLocations = {
         "${workspaceFolder}/dist/**/*.js",

@@ -9,7 +9,7 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 function M.config(server_name, opts)
   local server = require("lspconfig")[server_name]
-  local lsp_opts = require("wh.util").extend_tbl(
+  local lsp_opts = require("wh.utils").extend_tbl(
     { capabilities = server.capabilities },
     { capabilities = M.capabilities }
   )
@@ -24,7 +24,7 @@ function M.config(server_name, opts)
     pcall(require, "neodev")
   end
 
-  return require("wh.util").extend_tbl(lsp_opts, { [settings_key] = opts })
+  return require("wh.utils").extend_tbl(lsp_opts, { [settings_key] = opts })
 end
 
 function M.setup(server, opts)

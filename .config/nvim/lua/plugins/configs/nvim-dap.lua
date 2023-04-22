@@ -4,7 +4,7 @@ return function(_, opts)
   local dap = require "dap"
   local dapui = require "dapui"
 
-  local tools = require "wh.util.tools"
+  local tools = require "wh.utils.tools"
 
   for k, v in pairs(tools.dap.adapters) do
     dap.adapters[k] = v
