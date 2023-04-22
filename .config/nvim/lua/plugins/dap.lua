@@ -20,5 +20,6 @@ return {
         config = require "plugins.configs.nvim-dap-ui",
       },
     },
+    config = require "plugins.configs.nvim-dap",
   },
 }
