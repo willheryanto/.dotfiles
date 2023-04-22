@@ -4,7 +4,6 @@ return {
     priority = 100,
     branch = "0.1.x",
     dependencies = {
-      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "AckslD/nvim-neoclip.lua",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

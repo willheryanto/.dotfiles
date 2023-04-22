@@ -1,4 +1,5 @@
 return {
+  "nvim-lua/plenary.nvim",
   {
     "numToStr/Comment.nvim",
     opts = function()
@@ -6,12 +7,6 @@ return {
       return has_cs and cs and { pre_hook = cs.create_pre_hook() } or {}
     end,
   }, -- "gc" to comment visual regions/lines
-  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-  "tpope/vim-eunuch", -- Sugar for shell commands
-  "tpope/vim-surround", -- Bracket editor
-  "tpope/vim-abolish", -- Better %s
-  "tpope/vim-repeat", -- Supercharged "."
-  "tpope/vim-unimpaired", -- Nice to have keybindings
   {
     "windwp/nvim-autopairs",
     opts = {
@@ -20,12 +15,14 @@ return {
     },
     config = require "plugins.configs.nvim-autopairs",
   },
-  {
-    "knubie/vim-kitty-navigator",
-    build = { "cp ./*.py ~/.config/kitty/" },
-  },
+  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  "tpope/vim-eunuch", -- Sugar for shell commands
+  "tpope/vim-surround", -- Bracket editor
+  "tpope/vim-abolish", -- Better %s
+  "tpope/vim-repeat", -- Supercharged "."
+  "tpope/vim-unimpaired", -- Nice to have keybindings
   {
     "akinsho/toggleterm.nvim",
-    config = require 'plugins.configs.toggleterm'
+    config = require "plugins.configs.toggleterm",
   },
 }

@@ -49,6 +49,7 @@ return {
   }, -- Fancier statusline
   {
     "akinsho/bufferline.nvim",
+    lazy = false,
     opts = {
       options = {
         mode = "tabs",
@@ -90,9 +91,6 @@ return {
   }, -- Add indentation guides even on blank lines
   {
     "folke/todo-comments.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     config = function()
       require("todo-comments").setup {}
     end,
@@ -111,4 +109,11 @@ return {
     opts = {},
   },
   "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
+  {
+    "folke/trouble.nvim",
+    config = function()
+      require("trouble").setup {}
+      vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+    end,
+  },
 }
