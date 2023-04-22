@@ -1,5 +1,9 @@
 return {
   {
+    "nvim-tree/nvim-web-devicons",
+    opts = {},
+  },
+  {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
@@ -47,23 +51,28 @@ return {
       tabline = {},
     },
   }, -- Fancier statusline
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   lazy = false,
+  --   opts = {
+  --     options = {
+  --       mode = "tabs",
+  --       separator_style = "slant",
+  --       always_show_bufferline = false,
+  --       show_buffer_close_icons = false,
+  --       show_close_icon = false,
+  --       color_icons = true,
+  --     },
+  --   },
+  -- }, -- Tabs
   {
-    "akinsho/bufferline.nvim",
-    lazy = false,
-    opts = {
-      options = {
-        mode = "tabs",
-        separator_style = "slant",
-        always_show_bufferline = false,
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-        color_icons = true,
-      },
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
     },
-  }, -- Tabs
-  {
-    "yamatsum/nvim-web-nonicons",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    opts = {},
   },
   {
     "rcarriga/nvim-notify",

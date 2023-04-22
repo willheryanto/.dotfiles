@@ -14,7 +14,6 @@ return {
     "pwntester/octo.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
-      "kyazdani42/nvim-web-devicons",
     },
     keys = {
       { "<leader>go", ":Octo " },
