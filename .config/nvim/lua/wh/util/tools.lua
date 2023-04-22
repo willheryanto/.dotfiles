@@ -91,6 +91,47 @@ M.tools = {
   -- },
 }
 
+M.dap = {}
+
+M.dap.adapters = {
+  ["pwa-node"] = {
+    type = "server",
+    host = "127.0.0.1",
+    port = "${port}",
+    executable = {
+      command = "node",
+      args = { vim.fn.stdpath "data" .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+    },
+  },
+}
+
+local dap_default_js = {
+  type = "pwa-node",
+  request = "launch",
+  name = "Launch file",
+  program = "${file}",
+  cwd = "${workspaceFolder}",
+}
+
+M.dap.configurations = {
+  javascript = {
+    dap_default_js,
+  },
+
+  typescript = {
+    require("wh.util").extend_tbl(dap_default_js, {
+      runtimeExecutable = "ts-node",
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/dist/**/*.js",
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+      },
+      -- sourceMaps = true,
+      -- console = "integratedTerminal",
+    }),
+  },
+}
+
 function M.iterate_tools(callback)
   for tool, configs in pairs(M.tools) do
     for i = 1, #configs do

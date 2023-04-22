@@ -4,43 +4,15 @@ return function(_, opts)
   local dap = require "dap"
   local dapui = require "dapui"
 
-  dap.adapters["pwa-node"] = {
-    type = "server",
-    host = "127.0.0.1",
-    port = "${port}",
-    executable = {
-      command = "node",
-      args = { vim.fn.stdpath "data" .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
-    },
-  }
+  local tools = require "wh.util.tools"
 
-  dap.configurations.javascript = {
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-  }
+  for k, v in pairs(tools.dap.adapters) do
+    dap.adapters[k] = v
+  end
 
-  dap.configurations.typescript = {
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-      runtimeExecutable = "ts-node",
-      -- sourceMaps = true,
-      -- console = "integratedTerminal",
-      resolveSourceMapLocations = {
-        "${workspaceFolder}/dist/**/*.js",
-        "${workspaceFolder}/**",
-        "!**/node_modules/**",
-      },
-    },
-  }
+  for k, v in pairs(tools.dap.configurations) do
+    dap.configurations[k] = v
+  end
 
   keymap("n", "<F5>", dap.continue)
   keymap("n", "<F17>", dap.terminate)
