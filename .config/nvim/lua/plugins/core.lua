@@ -25,4 +25,8 @@ return {
     "akinsho/toggleterm.nvim",
     config = require "plugins.configs.toggleterm",
   },
+  {
+    "ggandor/leap.nvim",
+    config = require "plugins.configs.leap",
+  },
 }
