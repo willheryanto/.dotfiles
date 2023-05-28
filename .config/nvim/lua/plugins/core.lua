@@ -13,7 +13,7 @@ return {
       check_ts = true,
       disable_filetype = { "TelescopePrompt", "vim" },
     },
-    config = require "plugins.configs.nvim-autopairs",
+    config = require("plugins.configs.nvim-autopairs"),
   },
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   "tpope/vim-eunuch", -- Sugar for shell commands
@@ -23,10 +23,15 @@ return {
   "tpope/vim-unimpaired", -- Nice to have keybindings
   {
     "akinsho/toggleterm.nvim",
-    config = require "plugins.configs.toggleterm",
+    config = require("plugins.configs.toggleterm"),
   },
   {
     "ggandor/leap.nvim",
-    config = require "plugins.configs.leap",
+    config = require("plugins.configs.leap"),
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    config = require("plugins.configs.ufo"),
   },
 }

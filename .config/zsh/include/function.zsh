@@ -11,3 +11,7 @@ mkd() {
     mkdir $1 && cd $1
   fi
 }
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^X^e' edit-command-line

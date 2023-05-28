@@ -7,12 +7,14 @@ end
 -- Default capabilities
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
+M.capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+
 function M.config(server_name, opts)
   local server = require("lspconfig")[server_name]
-  local lsp_opts = require("wh.utils").extend_tbl(
-    { capabilities = server.capabilities },
-    { capabilities = M.capabilities }
-  )
+  local lsp_opts = require("wh.utils").extend_tbl({ capabilities = server.capabilities }, { capabilities = M.capabilities })
 
   local settings_key = "settings"
 
@@ -37,6 +39,12 @@ function M.on_attach(on_attach)
     callback = function(args)
       local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
+      client.server_capabilities.semanticTokensProvider = nil
+
+      if client.name == "ruff_lsp" then
+        client.server_capabilities.hoverProvider = false
+      end
+
       on_attach(client, buffer)
     end,
   })

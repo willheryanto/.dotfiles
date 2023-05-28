@@ -1,11 +1,23 @@
 return {
   {
     "folke/neodev.nvim", -- lua
+    priority = 1,
     opts = {},
   },
   {
     "simrat39/rust-tools.nvim", -- rust
-    config = require "plugins.configs.rust-tools",
+    config = require("plugins.configs.rust-tools"),
+  },
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
   },
   {
     "neovim/nvim-lspconfig",
@@ -13,10 +25,10 @@ return {
       {
         "williamboman/mason-lspconfig.nvim",
         cmd = { "LspInstall", "LspUninstall" },
-        config = require "plugins.configs.mason-lspconfig",
+        config = require("plugins.configs.mason-lspconfig"),
       },
     },
-    config = require "plugins.configs.lspconfig",
+    config = require("plugins.configs.lspconfig"),
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -25,9 +37,9 @@ return {
         "jay-babu/mason-null-ls.nvim",
         cmd = { "NullLsInstall", "NullLsUninstall" },
         opts = { handlers = nil },
-        config = require "plugins.configs.mason-null-ls",
+        config = require("plugins.configs.mason-null-ls"),
       },
     },
-    config = require "plugins.configs.null-ls",
+    config = require("plugins.configs.null-ls"),
   },
 }

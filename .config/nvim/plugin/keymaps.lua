@@ -1,8 +1,8 @@
 local keymap = vim.keymap.set
 
 -- Split window
-keymap("n", "ss", ":split<Return><C-w>w")
-keymap("n", "sv", ":vsplit<Return><C-w>w")
+keymap("n", "<leader>ss", ":split<Return><C-w>w")
+keymap("n", "<leader>sv", ":vsplit<Return><C-w>w")
 
 -- New tab
 keymap("n", "te", ":tabedit ")

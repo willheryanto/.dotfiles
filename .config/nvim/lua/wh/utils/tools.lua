@@ -10,22 +10,18 @@ M.lsp = {
   },
   gopls = {},
   texlab = {},
-  pyright = {},
-  -- pylsp = {
-  --   pylsp = {
-  --     plugins = {
-  --       ruff = { enabled = false },
-  --       autopep8 = { enabled = false },
-  --       flake8 = { enabled = false },
-  --       mccabe = { enabled = false },
-  --       pycodestyle = { enabled = false },
-  --       pydocstyle = { enabled = false },
-  --       pyflakes = { enabled = false },
-  --       pylint = { enabled = false },
-  --       yapf = { enabled = false },
-  --     },
-  --   },
-  -- },
+  pyright = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        useLibraryCodeForTypes = true,
+        diagnosticSeverityOverrides = {
+          reportGeneralTypeIssues = "error",
+          reportUndefinedVariable = "none",
+        },
+      },
+    },
+  },
   ruff_lsp = {},
   astro = {},
   cssls = {},
@@ -36,6 +32,7 @@ M.lsp = {
   sqlls = {},
   terraformls = {},
   eslint = {},
+  spectral = {},
 }
 
 M.tools = {
@@ -66,29 +63,11 @@ M.tools = {
       type = FORMATTING,
       settings = {
         condition = function(utils)
-          return utils.has_file { ".prettierrc.js" }
+          return utils.has_file({ ".prettierrc.js" }) or not utils.has_file({ ".eslintrc.js" })
         end,
       },
     },
   },
-  -- eslint_d = {
-  --   {
-  --     type = FORMATTING,
-  --     settings = {
-  --       condition = function(utils)
-  --         return utils.has_file { ".eslintrc.js" }
-  --       end,
-  --     },
-  --   },
-  --   {
-  --     type = DIAGNOSTICS,
-  --     settings = {
-  --       condition = function(utils)
-  --         return utils.has_file { ".eslintrc.js" }
-  --       end,
-  --     },
-  --   },
-  -- },
 }
 
 M.dap = {}
@@ -100,7 +79,7 @@ M.dap.adapters = {
     port = "${port}",
     executable = {
       command = "node",
-      args = { vim.fn.stdpath "data" .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+      args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
     },
   },
 }
@@ -126,8 +105,6 @@ M.dap.configurations = {
         "${workspaceFolder}/**",
         "!**/node_modules/**",
       },
-      -- sourceMaps = true,
-      -- console = "integratedTerminal",
     }),
   },
 }
