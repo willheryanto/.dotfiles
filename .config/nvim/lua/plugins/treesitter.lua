@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
     build = function()
-      pcall(require("nvim-treesitter.install").update { with_sync = true })
+      pcall(require("nvim-treesitter.install").update({ with_sync = true }))
     end,
     opts = {
       ensure_installed = {
@@ -18,7 +18,10 @@ return {
         "sql",
         "css",
       },
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
       incremental_selection = { enable = true },
       indent = { enable = true },
       autotag = { enable = true },
@@ -50,5 +53,6 @@ return {
         },
       },
     },
+    config = require("plugins.configs.treesitter"),
   },
 }
