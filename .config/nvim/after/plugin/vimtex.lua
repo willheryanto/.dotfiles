@@ -11,3 +11,9 @@ vim.g.vimtex_quickfix_ignore_filters = {
   "Underfull",
   "Overfull",
 }
+
+vim.cmd([[
+augroup WrapLineInTeXFile
+    autocmd FileType tex setlocal wrap
+augroup END
+]])

@@ -9,6 +9,10 @@ return {
     config = require("plugins.configs.rust-tools"),
   },
   {
+    "jose-elias-alvarez/typescript.nvim",
+    opts = {},
+  },
+  {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
       "ray-x/guihua.lua",

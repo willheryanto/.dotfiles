@@ -88,7 +88,7 @@ return {
           return
         end
 
-        require "notify"(msg, level, opts)
+        require("notify")(msg, level, opts)
       end
     end,
   },
@@ -104,7 +104,7 @@ return {
   {
     "folke/todo-comments.nvim",
     config = function()
-      require("todo-comments").setup {}
+      require("todo-comments").setup({})
     end,
   }, -- TODO highlight
   {
@@ -114,18 +114,24 @@ return {
         Copilot = "",
       },
     },
-    config = require "plugins.configs.lspkind",
+    config = require("plugins.configs.lspkind"),
   },
   {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     opts = {},
   },
   "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
   {
     "folke/trouble.nvim",
     config = function()
-      require("trouble").setup {}
+      require("trouble").setup({})
       vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
     end,
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    build = "./kitty/install-kittens.bash",
+    config = require("plugins.configs.smart-splits"),
   },
 }
