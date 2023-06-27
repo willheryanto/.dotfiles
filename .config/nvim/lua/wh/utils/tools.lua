@@ -4,7 +4,7 @@ local FORMATTING = "formatting"
 local DIAGNOSTICS = "diagnostics"
 
 M.lsp = {
-  tsserver = {},
+  -- tsserver = {},
   bashls = {
     SHELLCHECK_ARGUMENTS = "-x",
   },

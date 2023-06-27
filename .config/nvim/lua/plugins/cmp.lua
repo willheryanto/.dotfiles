@@ -6,24 +6,12 @@ return {
       config = require("plugins.configs.luasnip"),
     },
   },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup({})
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -45,8 +33,6 @@ return {
       local sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        { name = "copilot", keyword_pattern = "." },
-        { name = "jupyter" },
       }
 
       if has_dbc then
@@ -76,9 +62,11 @@ return {
           end, { "i", "s" }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
+            elseif require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
             else
               fallback()
             end
@@ -88,6 +76,8 @@ return {
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
               luasnip.jump(-1)
+            elseif require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").prev()
             else
               fallback()
             end
@@ -100,14 +90,17 @@ return {
         },
         formatting = {
           format = has_lspkind and lspkind.cmp_format({
-            with_text = true,
-            menu = {
-              buffer = "[buf]",
-              nvim_lsp = "[LSP]",
-              nvim_lua = "[api]",
-              path = "[path]",
-              luasnip = "[snip]",
-            },
+            -- with_text = true,
+            -- menu = {
+            --   buffer = "[buf]",
+            --   nvim_lsp = "[LSP]",
+            --   nvim_lua = "[api]",
+            --   path = "[path]",
+            --   luasnip = "[snip]",
+            -- },
+            mode = "symbol",
+            max_width = 50,
+            ellipsis_char = "...",
           }),
         },
         view = {
