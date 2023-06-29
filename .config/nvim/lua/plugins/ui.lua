@@ -8,7 +8,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = "kanagawa",
+        theme = "auto",
         component_separators = "|",
         section_separators = "",
       },
@@ -121,7 +121,7 @@ return {
     tag = "legacy",
     opts = {},
   },
-  "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
+  -- "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
   {
     "folke/trouble.nvim",
     config = function()
@@ -133,5 +133,15 @@ return {
     "mrjones2014/smart-splits.nvim",
     build = "./kitty/install-kittens.bash",
     config = require("plugins.configs.smart-splits"),
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {},
+    config = require("plugins.configs.which-key").setup,
   },
 }

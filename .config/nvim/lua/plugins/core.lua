@@ -30,8 +30,12 @@ return {
     config = require("plugins.configs.leap"),
   },
   {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    config = require("plugins.configs.ufo"),
+    "jinh0/eyeliner.nvim",
+    opts = {},
   },
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = "kevinhwang91/promise-async",
+  --   config = require("plugins.configs.ufo"),
+  -- },
 }
