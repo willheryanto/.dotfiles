@@ -19,13 +19,28 @@ function M.opts(name)
   if not plugin then
     return {}
   end
-  local Plugin = require "lazy.core.plugin"
+  local Plugin = require("lazy.core.plugin")
   return Plugin.values(plugin, "opts", false)
 end
 
 function M.extend_tbl(default, opts)
   opts = opts or {}
   return default and vim.tbl_deep_extend("force", default, opts) or opts
+end
+
+local Keys = require("lazy.core.handler.keys")
+
+---Abstracting keymap
+---@param value table
+function M.keymap(value)
+  local keys = Keys.parse(value)
+
+  if keys[2] == vim.NIL or keys[2] == false then
+    return
+  end
+
+  local opts = Keys.opts(keys)
+  vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
 end
 
 return M

@@ -1,12 +1,3 @@
-" Easier Moving between splits
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
-
-" Make windows to be basically the same size
-nnoremap <leader>= <C-w>=
-
 " For moving quickly up and down,
 " Goes to the first line above/below that isn't whitespace
 " Thanks to: http://vi.stackexchange.com/a/213

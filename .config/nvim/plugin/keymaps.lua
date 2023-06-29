@@ -1,18 +1,17 @@
-local keymap = vim.keymap.set
+local keymap = require("wh.utils").keymap
 
 -- Split window
-keymap("n", "<leader>ss", ":split<Return><C-w>w")
-keymap("n", "<leader>sv", ":vsplit<Return><C-w>w")
+keymap({ "<leader>ss", ":split<Return><C-w>w", desc = "Split window" })
+keymap({ "<leader>sv", ":vsplit<Return><C-w>w", desc = "Split window vertical" })
 
 -- New tab
-keymap("n", "te", ":tabedit ")
--- keymap('n', 'tt', ':tabnew<CR>')
+keymap({ "te", ":tabedit ", desc = "New tab" })
 
 -- Switching tabs
 local function switchtab_mapper()
   for i = 1, 9, 1 do
     local key = tostring(i)
-    keymap("n", "<leader>" .. key, key .. "gt")
+    keymap({ "<leader>" .. key, key .. "gt", desc = "Go to " .. key })
   end
 end
 
