@@ -1,42 +1,39 @@
+M = {}
+
+M.config = {
+  open_mapping = [[<c-\>]],
+  insert_mappings = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+}
+
 return function(_, opts)
-  local toggleterm = require "nvim-autopairs"
+  local toggleterm = require("nvim-autopairs")
+  local utils = require("wh.utils")
+  opts = utils.extend_tbl(M.config, opts)
   toggleterm.setup(opts)
 
-  local Terminal = require("toggleterm.terminal").Terminal
-
-  local function base_terminal(inner_opts)
-    local base_opts = {
+  _lazygit_toggle = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local lazygit = Terminal:new({
+      cmd = "lazygit",
+      hidden = true,
       direction = "float",
       float_opts = {
-        border = "double",
+        border = "none",
+        width = 100000,
+        height = 100000,
       },
-      -- function to run on opening the terminal
-      on_open = function(term)
-        vim.cmd "startinsert!"
-        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+      on_open = function(_)
+        vim.cmd("startinsert!")
       end,
-      -- function to run on closing the terminal
-      on_close = function(term)
-        vim.cmd "startinsert!"
-      end,
-    }
-
-    if inner_opts then
-      for k, v in pairs(inner_opts) do
-        base_opts[k] = v
-      end
-      vim.tbl_deep_extend("force", base_opts, inner_opts or {})
-    end
-
-    return Terminal:new(base_opts)
-  end
-
-  local lazygit = base_terminal { cmd = "lazygit", dir = "git_dir" }
-
-  ---@diagnostic disable-next-line: lowercase-global
-  function _lazygit_toggle()
+      on_close = function(_) end,
+      count = 99,
+    })
     lazygit:toggle()
   end
 
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "Layzgit" })
 end

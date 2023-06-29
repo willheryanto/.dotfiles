@@ -84,16 +84,9 @@ return {
         },
         formatting = {
           format = has_lspkind and lspkind.cmp_format({
-            -- with_text = true,
-            -- menu = {
-            --   buffer = "[buf]",
-            --   nvim_lsp = "[LSP]",
-            --   nvim_lua = "[api]",
-            --   path = "[path]",
-            --   luasnip = "[snip]",
-            -- },
-            mode = "symbol",
-            max_width = 50,
+            mode = "symbol_text",
+            -- preset = 'codicons',
+            -- max_width = 50,
             ellipsis_char = "...",
           }),
         },

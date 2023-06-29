@@ -33,9 +33,14 @@ return {
     "jinh0/eyeliner.nvim",
     opts = {},
   },
-  -- {
-  --   "kevinhwang91/nvim-ufo",
-  --   dependencies = "kevinhwang91/promise-async",
-  --   config = require("plugins.configs.ufo"),
-  -- },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    config = require("plugins.configs.ufo"),
+  },
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    config = require("plugins.configs.aerial").setup,
+  },
 }

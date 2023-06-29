@@ -17,9 +17,12 @@ return {
       {
         "rcarriga/nvim-dap-ui",
         opts = { floating = { border = "rounded" } },
-        config = require "plugins.configs.nvim-dap-ui",
+        config = require("plugins.configs.nvim-dap-ui"),
+      },
+      {
+        "jbyuki/one-small-step-for-vimkind",
       },
     },
-    config = require "plugins.configs.nvim-dap",
+    config = require("plugins.configs.nvim-dap"),
   },
 }

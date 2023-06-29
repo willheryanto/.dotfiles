@@ -82,6 +82,10 @@ M.dap.adapters = {
       args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
     },
   },
+
+  nlua = function(callback, config)
+    callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+  end,
 }
 
 local dap_default_js = {
@@ -106,6 +110,14 @@ M.dap.configurations = {
         "!**/node_modules/**",
       },
     }),
+  },
+
+  lua = {
+    {
+      type = "nlua",
+      request = "attach",
+      name = "Attach to running Neovim instance",
+    },
   },
 }
 

@@ -7,49 +7,49 @@ return {
     },
     keys = {
       {
-        "<leader>rn",
+        "<leader>tn",
         function()
           require("neotest").run.run()
         end,
-        desc = "Run all tests",
+        desc = "Run nearest tests",
       },
       {
-        "<leader>rf",
+        "<leader>tf",
         function()
           require("neotest").run.run(vim.fn.expand("%"))
         end,
         desc = "Run file tests",
       },
       {
-        "<leader>rr",
+        "<leader>tr",
         function()
           require("neotest").run.run_last()
         end,
         desc = "Run last tests",
       },
       {
-        "<leader>rd",
+        "<leader>td",
         function()
           require("neotest").run.run_last({ strategy = "dap" })
         end,
         desc = "Run last tests with dap",
       },
       {
-        "<leader>rp",
+        "<leader>tp",
         function()
           require("neotest").output_panel.toggle()
         end,
         desc = "Toggle output panel",
       },
       {
-        "<leader>rs",
+        "<leader>ts",
         function()
           require("neotest").summary.toggle()
         end,
         desc = "Toggle summary panel",
       },
       {
-        "<leader>ro",
+        "<leader>to",
         function()
           require("neotest").output.open({ enter = true })
         end,
@@ -70,7 +70,7 @@ return {
         desc = "Jump to next failed test",
       },
       {
-        "<leader>R",
+        "<leader>T",
         function()
           require("neotest").run.stop()
         end,

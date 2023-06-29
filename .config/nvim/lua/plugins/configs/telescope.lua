@@ -44,6 +44,7 @@ M.mappings = function()
     { "<leader>fp", Mapper.pick_telescope("file_browser_project"), desc = "File browser project" },
     { "<leader>fz", Mapper.pick_telescope("search_only_certain_files"), desc = "Search only certain files" },
     { "<leader>fg", Mapper.pick_telescope("live_grep"), desc = "Live grep" },
+    { "<leader>fa", Mapper.pick_telescope("aerial"), desc = "Find Aerial" },
   }
 
   for _, value in ipairs(maps) do
@@ -60,6 +61,7 @@ M.setup = function(_, opts)
   _ = require("telescope").load_extension("neoclip")
   _ = require("telescope").load_extension("notify")
   _ = require("telescope").load_extension("fzf")
+  _ = require("telescope").load_extension("aerial")
 
   M.mappings()
 end

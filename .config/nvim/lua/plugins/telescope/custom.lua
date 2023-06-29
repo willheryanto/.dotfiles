@@ -1,5 +1,5 @@
-local actions = require "telescope.actions"
-local action_state = require "telescope.actions.state"
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
 
 local set_prompt_to_entry_value = function(prompt_bufnr)
   local entry = action_state.get_selected_entry()
@@ -109,7 +109,7 @@ function M.file_browser_project()
     layout_config = {
       prompt_position = "top",
     },
-    path = os.getenv "PROJECT_PATH",
+    path = os.getenv("PROJECT_PATH"),
 
     mappings = {
       i = {
@@ -131,15 +131,29 @@ function M.file_browser_project()
   require("telescope").extensions.file_browser.file_browser(opts)
 end
 
+function M.aerial()
+  local opts
+
+  opts = {
+    sorting_strategy = "ascending",
+    scroll_strategy = "cycle",
+    layout_config = {
+      prompt_position = "top",
+    },
+  }
+
+  require("telescope").extensions.aerial.aerial(opts)
+end
+
 function M.search_only_certain_files()
-  require("telescope.builtin").find_files {
+  require("telescope.builtin").find_files({
     find_command = {
       "rg",
       "--files",
       "--type",
-      vim.fn.input "Type: ",
+      vim.fn.input("Type: "),
     },
-  }
+  })
 end
 
 -- return setmetatable({}, {

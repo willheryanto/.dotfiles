@@ -121,7 +121,6 @@ return {
     tag = "legacy",
     opts = {},
   },
-  -- "RRethy/vim-illuminate", -- Automatic highlight for word under cursor
   {
     "folke/trouble.nvim",
     config = function()
