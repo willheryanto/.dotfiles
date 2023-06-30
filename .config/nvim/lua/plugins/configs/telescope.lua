@@ -40,7 +40,11 @@ M.mappings = function()
     { "<leader>ez", Mapper.pick_telescope("edit_zsh"), desc = "Edit zsh" },
     { "<leader>fd", Mapper.pick_telescope("find_files"), desc = "Find files" },
     { "<leader>fe", Mapper.pick_telescope("file_browser"), desc = "File browser" },
-    { "<leader>fw", Mapper.pick_telescope("file_browser_from_current_buffer"), desc = "File browser from current browser" },
+    {
+      "<leader>fw",
+      Mapper.pick_telescope("file_browser_from_current_buffer"),
+      desc = "File browser from current browser",
+    },
     { "<leader>fp", Mapper.pick_telescope("file_browser_project"), desc = "File browser project" },
     { "<leader>fz", Mapper.pick_telescope("search_only_certain_files"), desc = "Search only certain files" },
     { "<leader>fg", Mapper.pick_telescope("live_grep"), desc = "Live grep" },

@@ -3,9 +3,7 @@ local action_state = require("telescope.actions.state")
 
 local set_prompt_to_entry_value = function(prompt_bufnr)
   local entry = action_state.get_selected_entry()
-  if not entry or not type(entry) == "table" then
-    return
-  end
+  if not entry or not type(entry) == "table" then return end
 
   action_state.get_current_picker(prompt_bufnr):reset_prompt(entry.ordinal)
 end
@@ -32,9 +30,7 @@ function M.edit_neovim()
       map("i", "<c-y>", set_prompt_to_entry_value)
       map("i", "<M-c>", function(prompt_bufnr)
         actions.close(prompt_bufnr)
-        vim.schedule(function()
-          require("telescope.builtin").find_files(opts_without_preview)
-        end)
+        vim.schedule(function() require("telescope.builtin").find_files(opts_without_preview) end)
       end)
 
       return true

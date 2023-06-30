@@ -2,9 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
-    build = function()
-      pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-    end,
+    build = function() pcall(require("nvim-treesitter.install").update({ with_sync = true })) end,
     opts = {
       ensure_installed = {
         "lua",

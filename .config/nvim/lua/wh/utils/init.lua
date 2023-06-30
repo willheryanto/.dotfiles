@@ -10,15 +10,11 @@ function M.on_attach(on_attach)
   })
 end
 
-function M.has(plugin)
-  return require("lazy.core.config").plugins[plugin] ~= nil
-end
+function M.has(plugin) return require("lazy.core.config").plugins[plugin] ~= nil end
 
 function M.opts(name)
   local plugin = require("lazy.core.config").plugins[name]
-  if not plugin then
-    return {}
-  end
+  if not plugin then return {} end
   local Plugin = require("lazy.core.plugin")
   return Plugin.values(plugin, "opts", false)
 end
@@ -35,9 +31,7 @@ local Keys = require("lazy.core.handler.keys")
 function M.keymap(value)
   local keys = Keys.parse(value)
 
-  if keys[2] == vim.NIL or keys[2] == false then
-    return
-  end
+  if keys[2] == vim.NIL or keys[2] == false then return end
 
   local opts = Keys.opts(keys)
   vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)

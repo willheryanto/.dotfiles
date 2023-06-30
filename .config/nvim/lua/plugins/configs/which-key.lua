@@ -34,36 +34,11 @@ M.setup = function(_, opts)
     },
     p = {
       name = "Plugins Manager",
-      i = {
-        function()
-          require("lazy").install()
-        end,
-        "Plugins Install",
-      },
-      s = {
-        function()
-          require("lazy").home()
-        end,
-        "Plugins Status",
-      },
-      S = {
-        function()
-          require("lazy").sync()
-        end,
-        "Plugins Sync",
-      },
-      u = {
-        function()
-          require("lazy").check()
-        end,
-        "Plugins Check Updates",
-      },
-      U = {
-        function()
-          require("lazy").update()
-        end,
-        "Plugins Update",
-      },
+      i = { function() require("lazy").install() end, "Plugins Install" },
+      s = { function() require("lazy").home() end, "Plugins Status" },
+      S = { function() require("lazy").sync() end, "Plugins Sync" },
+      u = { function() require("lazy").check() end, "Plugins Check Updates" },
+      U = { function() require("lazy").update() end, "Plugins Update" },
     },
   }
 

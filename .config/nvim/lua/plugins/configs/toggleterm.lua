@@ -26,14 +26,17 @@ return function(_, opts)
         width = 100000,
         height = 100000,
       },
-      on_open = function(_)
-        vim.cmd("startinsert!")
-      end,
+      on_open = function(_) vim.cmd("startinsert!") end,
       on_close = function(_) end,
       count = 99,
     })
     lazygit:toggle()
   end
 
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "Layzgit" })
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gg",
+    "<cmd>lua _lazygit_toggle()<CR>",
+    { noremap = true, silent = true, desc = "Layzgit" }
+  )
 end

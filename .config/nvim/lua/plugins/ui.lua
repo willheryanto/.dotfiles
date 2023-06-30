@@ -84,9 +84,7 @@ return {
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.notify = function(msg, level, opts)
         -- log.info(msg, level, opts)
-        if string.find(msg, "method .* is not supported") then
-          return
-        end
+        if string.find(msg, "method .* is not supported") then return end
 
         require("notify")(msg, level, opts)
       end
@@ -103,9 +101,7 @@ return {
   }, -- Add indentation guides even on blank lines
   {
     "folke/todo-comments.nvim",
-    config = function()
-      require("todo-comments").setup({})
-    end,
+    config = function() require("todo-comments").setup({}) end,
   }, -- TODO highlight
   {
     "onsails/lspkind-nvim",

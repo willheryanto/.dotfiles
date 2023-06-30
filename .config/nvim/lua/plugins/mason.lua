@@ -8,6 +8,6 @@ return {
       "MasonUninstallAll",
       "MasonLog",
     },
-    config = require "plugins.configs.mason",
+    config = require("plugins.configs.mason"),
   },
 }

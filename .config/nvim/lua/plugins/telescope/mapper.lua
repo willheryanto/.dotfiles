@@ -1,4 +1,4 @@
-local custom_telescope = require "plugins.telescope.custom"
+local custom_telescope = require("plugins.telescope.custom")
 
 local M = {}
 

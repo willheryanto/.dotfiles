@@ -20,24 +20,18 @@ return {
       local has_luasnip, luasnip = pcall(require, "luasnip")
       local has_dbc = require("wh.utils").has("vim-dadbod-completion")
 
-      if not has_luasnip then
-        return
-      end
+      if not has_luasnip then return end
 
       local sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
       }
 
-      if has_dbc then
-        table.insert(sources, { name = "vim-dadbod-completion" })
-      end
+      if has_dbc then table.insert(sources, { name = "vim-dadbod-completion" }) end
 
       return {
         snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+          expand = function(args) luasnip.lsp_expand(args.body) end,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),

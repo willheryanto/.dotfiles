@@ -31,7 +31,7 @@ function M.get()
 end
 
 function M.on_attach(client, buffer)
-  local Keys = require "lazy.core.handler.keys"
+  local Keys = require("lazy.core.handler.keys")
   local keymaps = {}
 
   for _, value in ipairs(M.get()) do
@@ -54,16 +54,12 @@ function M.on_attach(client, buffer)
   end
 end
 
-function M.rename()
-  vim.lsp.buf.rename()
-end
+function M.rename() vim.lsp.buf.rename() end
 
 function M.diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go { severity = severity }
-  end
+  return function() go({ severity = severity }) end
 end
 
 return M

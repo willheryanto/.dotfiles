@@ -7,9 +7,7 @@ return function(_, opts)
         jestCommand = "npm run test:single --",
         jestConfigFile = "jest.config.ts",
         env = { CI = true },
-        cwd = function(path)
-          return vim.fn.getcwd()
-        end,
+        cwd = function(path) return vim.fn.getcwd() end,
       }),
     },
   }
