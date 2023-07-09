@@ -33,6 +33,7 @@ M.lsp = {
   terraformls = {},
   eslint = {},
   spectral = {},
+  prismals = {},
 }
 
 M.tools = {
@@ -68,6 +69,18 @@ M.tools = {
       },
     },
   },
+  sqlfmt = {
+    {
+      type = FORMATTING,
+      settings = {},
+    },
+  },
+  prismaFmt = {
+    {
+      type = FORMATTING,
+      settings = {},
+    },
+  },
 }
 
 M.dap = {}
@@ -78,7 +91,7 @@ M.dap.adapters = {
     host = "127.0.0.1",
     port = "${port}",
     executable = {
-      command = "node",
+      command = "mn",
       args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
     },
   },

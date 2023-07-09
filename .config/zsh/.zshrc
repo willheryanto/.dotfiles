@@ -1,14 +1,18 @@
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+
+### Added by Zinit's installer
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Load a few important annexes, without Turbo (this is currently required for annexes)
 zinit light-mode for \
@@ -19,51 +23,32 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 ##########################
-# Prompt               #
+# Prompt                #
 ##########################
 
-zinit ice from"gh-r" as"command" atload'eval "$(starship init zsh)"'
-zinit load starship/starship
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 ##########################
 # Pluginsx               #
 ##########################
 
-zinit for \
-    light-mode \
-  zsh-users/zsh-autosuggestions \
-    light-mode \
-  zdharma-continuum/fast-syntax-highlighting \
-  zdharma-continuum/history-search-multi-word
-
-zi ice from"gh-r" as"program"
-zi light junegunn/fzf
-
-zi ice as"command" from"gh-r" mv"ripgrep* -> rg" pick"rg/rg"
-zi light BurntSushi/ripgrep
-
-zi ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
-zi light sharkdp/fd
-
-zi ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zi light sharkdp/bat
-
-zi ice lucid from"gh-r" as"program" mv"bin/exa* -> exa"
-zi light ogham/exa
-
-zi ice lucid from"gh-r" as"program" mv"lazygit* -> lazygit"
-zi light jesseduffield/lazygit
-
-zi ice lucid from"gh-r" as"program" mv"zellij* -> zellij"
-zi light zellij-org/zellij
-
-zi ice lucid from"gh-r" as"program" mv"jq* -> jq"
-zi light stedolan/jq
-
 zi light rupa/z
 
-zi load asdf-vm/asdf
+zinit light zsh-users/zsh-autosuggestions
+
+zi for \
+    atload"zicompinit; zicdreplay" \
+    blockf \
+    lucid \
+    wait \
+  zsh-users/zsh-completions
+
+zinit light zsh-users/zsh-syntax-highlighting
 
 ##########################
 # Settings               #
@@ -77,11 +62,25 @@ bindkey '^N' down-history
 ##########################
 
 sources=(
-  'alias'
   'function'
-  'tmux'
+  'alias'
+  'prompt'
+  'go'
+  'bin'
+  'docker'
 )
 
 for s in "${sources[@]}"; do
   source $HOME/.config/zsh/include/${s}.zsh
 done
+
+bindkey -e
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+autoload -Uz compinit
+compinit

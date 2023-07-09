@@ -10,6 +10,23 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    keys = {
+      {
+        "<leader>vo",
+        ":DiffviewOpen<CR>",
+        desc = "Open diffview",
+      },
+      {
+        "<leader>vc",
+        ":DiffviewClose<CR> ",
+        desc = "Close diffview",
+      },
+      {
+        "<leader>vh",
+        ":DiffviewFileHistory %<CR> ",
+        desc = "Open diffview of current file history",
+      },
+    },
   },
   {
     "pwntester/octo.nvim",

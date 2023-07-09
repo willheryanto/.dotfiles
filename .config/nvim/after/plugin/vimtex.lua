@@ -4,7 +4,7 @@ vim.g.vimtex_view_skim_sync = 1
 vim.g.vimtex_view_skim_activate = 1
 
 vim.g.vimtex_compiler_latexmk = {
-  build_dir = "build",
+  out_dir = "dist",
 }
 
 vim.g.vimtex_quickfix_ignore_filters = {

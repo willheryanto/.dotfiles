@@ -18,4 +18,12 @@ if type lazygit > /dev/null; then
   alias lg=lazygit
 fi
 
+if type nnn > /dev/null; then
+  alias n=nnn
+
+  function nnn() {
+    command nnn -e "$@"
+  }
+fi
+
 alias ez="cd $XDG_CONFIG_HOME/zsh/ && $EDITOR .zshrc"
