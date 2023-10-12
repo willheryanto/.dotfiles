@@ -15,12 +15,12 @@ return {
     },
     config = require("plugins.configs.nvim-autopairs"),
   },
-  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  -- "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   "tpope/vim-eunuch", -- Sugar for shell commands
   "tpope/vim-surround", -- Bracket editor
   "tpope/vim-abolish", -- Better %s
-  "tpope/vim-repeat", -- Supercharged "."
-  "tpope/vim-unimpaired", -- Nice to have keybindings
+  -- "tpope/vim-repeat", -- Supercharged "."
+  -- "tpope/vim-unimpaired", -- Nice to have keybindings
   {
     "akinsho/toggleterm.nvim",
     config = require("plugins.configs.toggleterm"),
@@ -29,13 +29,42 @@ return {
     "ggandor/leap.nvim",
     config = require("plugins.configs.leap"),
   },
+  -- {
+  --   "folke/flash.nvim",
+  --   event = "VeryLazy",
+  --   ---@type Flash.Config
+  --   opts = {},
+  --   keys = {
+  --     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  --     { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+  -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+  -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  --   },
+  -- },
   {
     "jinh0/eyeliner.nvim",
     opts = {},
   },
   {
     "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup({
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+              { text = { "%s" }, click = "v:lua.ScSa" },
+              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+            },
+          })
+        end,
+      },
+    },
     config = require("plugins.configs.ufo"),
   },
   {

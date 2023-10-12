@@ -6,13 +6,20 @@ return {
   },
   {
     "simrat39/rust-tools.nvim", -- rust
+    opts = {
+      tools = {
+        inlay_hints = {
+          auto = true,
+        },
+      },
+    },
     config = require("plugins.configs.rust-tools"),
   },
-  {
-    "pmizio/typescript-tools.nvim", -- typescript
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim", -- typescript
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  -- },
   {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
@@ -21,6 +28,9 @@ return {
     config = function() require("go").setup() end,
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
+    opts = {
+      lsp_cfg = false,
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -45,4 +55,13 @@ return {
     },
     config = require("plugins.configs.null-ls"),
   },
+  -- {
+  --   "ray-x/navigator.lua",
+  --   dependencies = {
+  --     { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+  --     { "neovim/nvim-lspconfig" },
+  --   },
+  --   opts = {},
+  --   config = require("plugins.configs.navigator"),
+  -- },
 }

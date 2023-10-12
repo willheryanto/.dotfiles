@@ -44,4 +44,9 @@ return {
       "tyru/open-browser.vim",
     },
   },
+  {
+    "NeogitOrg/neogit",
+    commit = "08d23c7ae1e7c3c66802990d5aa16269bdd996a7",
+    opts = {},
+  },
 }

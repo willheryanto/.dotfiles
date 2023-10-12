@@ -25,7 +25,10 @@ function M.config(server_name, opts)
     pcall(require, "neodev")
   end
 
-  return require("wh.utils").extend_tbl(lsp_opts, { [settings_key] = opts })
+  if opts.root_dir ~= nil then opts.root_dir = require("lspconfig.util").root_pattern(unpack(opts.root_dir)) end
+
+  -- return require("wh.utils").extend_tbl(lsp_opts, { [settings_key] = opts })
+  return require("wh.utils").extend_tbl(lsp_opts, opts)
 end
 
 function M.setup(server, opts)

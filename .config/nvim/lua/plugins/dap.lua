@@ -9,10 +9,14 @@ return {
           "DapUninstall",
         },
         opts = {
-          ensure_installed = { "javascript" },
+          ensure_installed = { "javascript", "codelldb" },
           automatic_installation = true,
           handlers = {},
         },
+      },
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        opts = {},
       },
       {
         "rcarriga/nvim-dap-ui",
@@ -24,5 +28,9 @@ return {
       },
     },
     config = require("plugins.configs.nvim-dap"),
+  },
+  {
+    "leoluz/nvim-dap-go",
+    config = function() require("dap-go").setup() end,
   },
 }

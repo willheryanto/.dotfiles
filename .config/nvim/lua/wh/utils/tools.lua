@@ -3,21 +3,25 @@ local M = {}
 local FORMATTING = "formatting"
 local DIAGNOSTICS = "diagnostics"
 
-M.lsp = {
-  -- tsserver = {},
+M.mason_lsp = {
+  tsserver = {},
   bashls = {
-    SHELLCHECK_ARGUMENTS = "-x",
+    cmd_env = {
+      SHELLCHECK_ARGUMENTS = "-x",
+    },
   },
   gopls = {},
   texlab = {},
   pyright = {
-    python = {
-      analysis = {
-        typeCheckingMode = "basic",
-        useLibraryCodeForTypes = true,
-        diagnosticSeverityOverrides = {
-          reportGeneralTypeIssues = "error",
-          reportUndefinedVariable = "none",
+    settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "basic",
+          useLibraryCodeForTypes = true,
+          diagnosticSeverityOverrides = {
+            reportGeneralTypeIssues = "error",
+            reportUndefinedVariable = "none",
+          },
         },
       },
     },
@@ -34,6 +38,21 @@ M.lsp = {
   eslint = {},
   spectral = {},
   prismals = {},
+  solargraph = {
+    -- cmd = { os.getenv("HOME") .. "/.asdf/shims/solargraph", "stdio" },
+    root_dir = { ".git" },
+    settings = {
+      solargraph = {
+        diagnostic = false,
+      },
+    },
+  },
+  lua_ls = {},
+  clangd = {},
+}
+
+M.lsp = {
+  sourcekit = {},
 }
 
 M.tools = {
@@ -81,6 +100,18 @@ M.tools = {
       settings = {},
     },
   },
+  hadolint = {
+    {
+      type = DIAGNOSTICS,
+      settings = {},
+    },
+  },
+  cpplint = {
+    {
+      type = DIAGNOSTICS,
+      settings = {},
+    },
+  },
 }
 
 M.dap = {}
@@ -91,7 +122,7 @@ M.dap.adapters = {
     host = "127.0.0.1",
     port = "${port}",
     executable = {
-      command = "mn",
+      command = "node",
       args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
     },
   },
@@ -99,6 +130,16 @@ M.dap.adapters = {
   nlua = function(callback, config)
     callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
   end,
+
+  -- codelldb = {
+  --   type = "server",
+  --   host = "127.0.0.1",
+  --   port = "${port}",
+  --   executable = {
+  --     command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
+  --     args = { "--port", "${port}" },
+  --   },
+  -- },
 }
 
 local dap_default_js = {
@@ -119,7 +160,7 @@ M.dap.configurations = {
       runtimeExecutable = "mtn",
       resolveSourceMapLocations = {
         "${workspaceFolder}/dist/**/*.js",
-        "${workspaceFolder}/**",
+        "**/@xendit/**/*.js",
         "!**/node_modules/**",
       },
     }),

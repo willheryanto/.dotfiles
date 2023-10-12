@@ -1,3 +1,4 @@
+
 local M = {}
 
 function M.on_attach(on_attach)
@@ -34,7 +35,7 @@ function M.keymap(value)
   if keys[2] == vim.NIL or keys[2] == false then return end
 
   local opts = Keys.opts(keys)
-  vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
+  vim.keymap.set(keys.mode or "n", keys["lhs"], keys["rhs"], opts)
 end
 
 return M

@@ -14,3 +14,6 @@ nmap <space>x "_x
 
 " Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
 nnoremap <silent> <expr> <CR> {-> v:hlsearch ? "<cmd>nohl\<CR>" : "\<CR>"}()
+
+" Generate comment for current line.
+nmap <silent> <Leader>dg <Plug>(doge-generate)

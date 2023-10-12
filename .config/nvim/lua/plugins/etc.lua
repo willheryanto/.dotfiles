@@ -1,7 +1,15 @@
 return {
+  -- {
+  --   "knubie/vim-kitty-navigator",
+  --   build = { "cp ./*.py ~/.config/kitty/" },
+  -- },
   {
-    "knubie/vim-kitty-navigator",
-    build = { "cp ./*.py ~/.config/kitty/" },
+    "christoomey/vim-tmux-navigator",
+    priority = 0,
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    config = require("plugins.configs.smart-splits"),
   },
   {
     "ThePrimeagen/refactoring.nvim",
@@ -45,5 +53,25 @@ return {
         { noremap = true, silent = true, expr = false, desc = "Inline Variable" }
       )
     end,
+  },
+  {
+    "kkoomen/vim-doge",
+    build = ":call doge#install()",
+  },
+  -- {
+  --   "cdelledonne/vim-cmake",
+  -- },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function() require("colorizer").setup() end,
+  },
+  {
+    "uga-rosa/ccc.nvim",
+    config = function() require("ccc").setup() end,
+  },
+  {
+    "Civitasv/cmake-tools.nvim",
+    commit = "a3636da",
+    opts = {},
   },
 }

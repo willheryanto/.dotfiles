@@ -93,11 +93,14 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
-      char = "┊",
-      show_trailing_blankline_indent = false,
-      use_treesitter = true,
-      show_current_context = true,
+      indent = {
+        char = "┊",
+      },
+      scope = {
+        enabled = true,
+      },
     },
+    config = require("plugins.configs.ibl"),
   }, -- Add indentation guides even on blank lines
   {
     "folke/todo-comments.nvim",
@@ -123,11 +126,6 @@ return {
       require("trouble").setup({})
       vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
     end,
-  },
-  {
-    "mrjones2014/smart-splits.nvim",
-    build = "./kitty/install-kittens.bash",
-    config = require("plugins.configs.smart-splits"),
   },
   {
     "folke/which-key.nvim",

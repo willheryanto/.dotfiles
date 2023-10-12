@@ -3,7 +3,8 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
       "antoinemadec/FixCursorHold.nvim",
-      "haydenmeade/neotest-jest",
+      -- "haydenmeade/neotest-jest",
+      "guivazcabral/neotest-jest",
     },
     keys = {
       {

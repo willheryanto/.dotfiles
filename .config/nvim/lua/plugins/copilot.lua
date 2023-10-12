@@ -3,9 +3,22 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
+    keys = {
+      {
+        "<leader>co",
+        ":Copilot",
+        desc = "Run Copilot",
+      },
+      {
+        "<leader>cp",
+        "<CMD>Copilot panel<CR>",
+        desc = "Toggle Copilot panel",
+      },
+    },
     opts = {
       panel = {
         enabled = true,
+        auto_refresh = true,
       },
       suggestion = {
         enabled = true,
@@ -25,5 +38,16 @@ return {
       },
     },
     config = require("plugins.configs.copilot"),
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    commit = "24bcca7",
+    config = function() require("chatgpt").setup() end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
   },
 }
