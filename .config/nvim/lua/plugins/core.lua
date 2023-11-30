@@ -20,7 +20,7 @@ return {
   "tpope/vim-surround", -- Bracket editor
   "tpope/vim-abolish", -- Better %s
   -- "tpope/vim-repeat", -- Supercharged "."
-  -- "tpope/vim-unimpaired", -- Nice to have keybindings
+  "tpope/vim-unimpaired", -- Nice to have keybindings
   {
     "akinsho/toggleterm.nvim",
     config = require("plugins.configs.toggleterm"),
@@ -48,6 +48,7 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
+    enabled = true,
     dependencies = {
       "kevinhwang91/promise-async",
       {
@@ -71,5 +72,17 @@ return {
     "stevearc/aerial.nvim",
     opts = {},
     config = require("plugins.configs.aerial").setup,
+  },
+  { "Vimjas/vim-python-pep8-indent" },
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-telescope/telescope.nvim",
+      "mfussenegger/nvim-dap-python",
+    },
+    opts = {
+      dap_enabled = true,
+    },
   },
 }

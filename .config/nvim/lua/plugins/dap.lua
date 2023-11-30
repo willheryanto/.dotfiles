@@ -9,7 +9,7 @@ return {
           "DapUninstall",
         },
         opts = {
-          ensure_installed = { "javascript", "codelldb" },
+          ensure_installed = { "javascript", "python" },
           automatic_installation = true,
           handlers = {},
         },
@@ -26,11 +26,24 @@ return {
       {
         "jbyuki/one-small-step-for-vimkind",
       },
+      {
+        "mxsdev/nvim-dap-vscode-js",
+      },
+      {
+        "microsoft/vscode-js-debug",
+        version = "1.x",
+        build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+      },
     },
     config = require("plugins.configs.nvim-dap"),
   },
   {
     "leoluz/nvim-dap-go",
-    config = function() require("dap-go").setup() end,
+    main = "dap-go",
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function() require("dap-python").setup(os.getenv("HOME") .. "/.asdf/shims/python", {}) end,
   },
 }

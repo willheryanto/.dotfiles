@@ -4,7 +4,7 @@ return function(_, opts)
   local adapters = {
     adapters = {
       utils.has("neotest-jest") and require("neotest-jest")({
-        jestCommand = "npm run test:single --",
+        jestCommand = "npm run test:all -- ",
         jestConfigFile = "jest.config.js",
         env = { CI = true },
         cwd = function(path) return vim.fn.getcwd() end,

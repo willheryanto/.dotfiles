@@ -26,11 +26,16 @@ M.mason_lsp = {
       },
     },
   },
-  ruff_lsp = {},
+  ruff_lsp = {
+    settings = {
+      organizeImports = false,
+    },
+    on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+  },
   astro = {},
-  cssls = {},
-  cssmodules_ls = {},
-  tailwindcss = {},
+  -- cssls = {},
+  -- cssmodules_ls = {},
+  -- tailwindcss = {},
   vimls = {},
   marksman = {},
   sqlls = {},
@@ -49,6 +54,7 @@ M.mason_lsp = {
   },
   lua_ls = {},
   clangd = {},
+  yamlls = {},
 }
 
 M.lsp = {
@@ -71,10 +77,6 @@ M.tools = {
   ruff = {
     {
       type = FORMATTING,
-      settings = {},
-    },
-    {
-      type = DIAGNOSTICS,
       settings = {},
     },
   },
@@ -130,16 +132,6 @@ M.dap.adapters = {
   nlua = function(callback, config)
     callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
   end,
-
-  -- codelldb = {
-  --   type = "server",
-  --   host = "127.0.0.1",
-  --   port = "${port}",
-  --   executable = {
-  --     command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
-  --     args = { "--port", "${port}" },
-  --   },
-  -- },
 }
 
 local dap_default_js = {
@@ -159,8 +151,7 @@ M.dap.configurations = {
     require("wh.utils").extend_tbl(dap_default_js, {
       runtimeExecutable = "mtn",
       resolveSourceMapLocations = {
-        "${workspaceFolder}/dist/**/*.js",
-        "**/@xendit/**/*.js",
+        "${workspaceFolder}/**",
         "!**/node_modules/**",
       },
     }),

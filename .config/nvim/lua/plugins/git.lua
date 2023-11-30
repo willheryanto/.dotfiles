@@ -31,7 +31,9 @@ return {
   {
     "pwntester/octo.nvim",
     dependencies = {
+      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
     },
     keys = {
       { "<leader>go", ":Octo " },
@@ -43,6 +45,18 @@ return {
     dependencies = {
       "tyru/open-browser.vim",
     },
+  },
+  {
+    "ldelossa/gh.nvim",
+    dependencies = {
+      {
+        "ldelossa/litee.nvim",
+      },
+    },
+    config = function()
+      require("litee.lib").setup()
+      require("litee.gh").setup()
+    end,
   },
   {
     "NeogitOrg/neogit",
